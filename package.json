@@ -1,15 +1,23 @@
 {
   "name": "text-ld",
-  "version": "0.0.1",
-  "description": "Text Linked Data A Schema.org Type",
-  "main": "dist/index.js",
+  "version": "0.0.2",
+  "description": "Text Linked Data a Schema.org Type",
+  "main": "dist/index.cjs",
   "source": "src/index.ts",
   "type": "commonjs",
   "types": "dist/types.d.ts",
   "targets": {
     "main": {
-      "includeNodeModules": true
+      "includeNodeModules": [
+        "@qertis/franc-node"
+      ],
+      "isLibrary": true,
+      "optimize": true,
+      "outputFormat": "commonjs"
     }
+  },
+  "engines": {
+    "node": ">= 20"
   },
   "scripts": {
     "prebuild": "rm -rf dist",
@@ -18,18 +26,18 @@
     "watch": "tsc --watch"
   },
   "files": [
-    "dist/index.js",
-    "dist/index.js.map",
+    "dist/index.cjs",
+    "dist/index.cjs.map",
     "dist/types.d.ts",
     "dist/types.d.ts.map"
   ],
   "author": "Denis Baskovsky (https://baskovsky.ru/)",
   "license": "UNLICENSED",
   "dependencies": {
+    "eyo-kernel": "^2.5.6"
   },
   "devDependencies": {
     "@qertis/franc-node": "^6.2.0",
-    "eyo-kernel": "^2.5.6",
     "@parcel/packager-ts": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
     "parcel": "^2.12.0",
