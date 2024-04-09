@@ -1,0 +1,42 @@
+{
+  "name": "text-ld",
+  "version": "0.0.1",
+  "description": "Text Linked Data A Schema.org Type",
+  "main": "dist/index.js",
+  "source": "src/index.ts",
+  "type": "commonjs",
+  "types": "dist/types.d.ts",
+  "targets": {
+    "main": {
+      "includeNodeModules": true
+    }
+  },
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc --noEmit && parcel build --no-cache",
+    "test": "node test/index.cjs",
+    "watch": "tsc --watch"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/types.d.ts",
+    "dist/types.d.ts.map"
+  ],
+  "author": "Denis Baskovsky (https://baskovsky.ru/)",
+  "license": "UNLICENSED",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@qertis/franc-node": "^6.2.0",
+    "eyo-kernel": "^2.5.6",
+    "@parcel/packager-ts": "^2.12.0",
+    "@parcel/transformer-typescript-types": "^2.12.0",
+    "parcel": "^2.12.0",
+    "typescript": "^5.4.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qertis/text-ld.git"
+  }
+}

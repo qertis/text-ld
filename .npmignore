@@ -1,0 +1,9 @@
+.parcelrc
+.parcel-cache/
+node_modules/
+src/
+test/
+.gitignore
+tsconfig.json
+.npmrc
+.npmignore
