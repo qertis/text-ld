@@ -1,22 +1,14 @@
 {
   "compilerOptions": {
+    "target": "ES2022",
     "declaration": true,
-    "skipLibCheck": true,
-    "isolatedModules": true,
-    "esModuleInterop": true,
-    "outDir": "./dist",
-    "removeComments": true,
-    "module": "commonjs",
-    "target": "es2022",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "strict": true
+    "isolatedModules": true
   },
   "exclude": [
     "node_modules",
     "**/*.spec.ts"
   ],
   "include": [
-    "src/*"
+    "src/**/*"
   ]
 }

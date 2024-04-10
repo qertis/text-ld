@@ -37,14 +37,14 @@ export const isRUS = (languageCode: string): boolean => {
  * @param {string} language - lang
  * @returns {string}
  */
-export const langISO = (language: string): string => {
+const langISO = (language: string): string => {
   return language.slice(0, 2);
 }
 /**
  * @param {string} langCode - query
  * @returns {string}
  */
-export const fullLangCode = (langCode: string): string => {
+const fullLangCode = (langCode: string): string => {
   switch (langCode) {
     case RUS:
       return 'russian';

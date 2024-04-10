@@ -11,7 +11,7 @@ interface ICreativeWork {
     inLanguage: string
 }
 
-export default async (text: string) => {
+export async function creativeWork(text: string) {
     const context = {
         '@type': 'CreativeWork',
         'encodingFormat': 'plain/text',
@@ -22,6 +22,7 @@ export default async (text: string) => {
     if (text.endsWith(' ')) {
         text = text.trimEnd();
     }
+    context.keywords = getKeywords(text);
     context.inLanguage = getLang(text).iso;
     try {
         text = await getSuggest(text, context.inLanguage);
@@ -34,7 +35,6 @@ export default async (text: string) => {
         console.warn('Yandex Speller ERROR:', error);
     }
     context.text = text;
-    context.keywords = getKeywords(text);
 
     return context;
 }

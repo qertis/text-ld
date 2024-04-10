@@ -1,19 +1,19 @@
 // @ts-ignore
 import Eyo from 'eyo-kernel';
-import { isENG, isRUS, langISO } from './detection-lang';
+import { isENG, isRUS } from './detection-lang';
 
 /**
  * @constant
  * @type {string}
  */
-const SPELLER_HOST = 'speller.yandex.net';
+const SPELLER_HOST: string = 'speller.yandex.net';
 /**
  * @param {object} obj - object
  * @param {string} obj.text - Текст для проверки
  * @param {string} obj.lang - Языки проверки
  * @param {string} obj.format - Формат проверяемого текста
  * @param {number} obj.options - Опции Яндекс.Спеллера. Значением параметра является сумма значений требуемых опций
- * @returns {Promise<Object|ReferenceError>}
+ * @returns {Promise<Array<Object>|ReferenceError>}
  */
 const spellText = async ({
   text,
@@ -28,7 +28,6 @@ const spellText = async ({
     signal: AbortSignal.timeout(1000),
   });
   const result = await response.json();
-
   if (!Array.isArray(result)) {
     throw new ReferenceError('spellCheck API changes');
   }
@@ -42,7 +41,7 @@ const spellText = async ({
  * @param {string} what - what text
  * @returns {string}
  */
-export const replaceBetween = (string: string, start: number, end: number, what: string): string => {
+const replaceBetween = (string: string, start: number, end: number, what: string): string => {
   return string.slice(0, start) + what + string.slice(end);
 };
 
@@ -55,7 +54,7 @@ export const replaceBetween = (string: string, start: number, end: number, what:
  * @param {string} [lang] - text language
  * @returns {Promise<string>}
  */
-const correctionText = async (text: string, lang: string): Promise<string> => {
+const correctionText = async (text: string, lang?: string): Promise<string> => {
   if (!text) {
     throw new Error('Text is undefined');
   }
@@ -111,6 +110,5 @@ export default (text: string, language: string): Promise<string> => {
     console.warn('Unsupported language');
     return Promise.resolve(text);
   }
-  const yandexSpellLanguageCode = langISO(language);
-  return correctionText(text, yandexSpellLanguageCode);
+  return correctionText(text, language);
 };

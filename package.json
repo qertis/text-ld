@@ -1,6 +1,6 @@
 {
   "name": "text-ld",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Text Linked Data a Schema.org Type",
   "main": "dist/index.cjs",
   "source": "src/index.ts",
@@ -13,6 +13,8 @@
       ],
       "isLibrary": true,
       "optimize": true,
+      "context": "node",
+      "scopeHoist": true,
       "outputFormat": "commonjs"
     }
   },
@@ -20,10 +22,10 @@
     "node": ">= 20"
   },
   "scripts": {
-    "prebuild": "rm -rf dist",
-    "build": "tsc --noEmit && parcel build --no-cache",
+    "prebuild": "rm -rf dist && tsc --noEmit",
+    "build": "parcel build --no-cache",
     "test": "node test/index.cjs",
-    "watch": "tsc --watch"
+    "watch": "parcel watch --no-cache"
   },
   "files": [
     "dist/index.cjs",
