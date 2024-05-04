@@ -84,24 +84,6 @@ export default (text: string, language: string): Promise<string> => {
     const safeEyo = new Eyo();
     safeEyo.dictionary.loadSafeSync();
     text = safeEyo.restore(text);
-
-    // формируем верное окончание предложения
-    switch (text[text.length -1]) {
-        case '?':
-        case '!':
-        case '.':
-        {
-            break;
-        }
-        default: {
-            // TODO: анализируемое поведение - анализируем введенный текст узнаем желания/намерение пользователя в более глубоком виде
-            // выставляем символ «.» для обычных предложений
-            // выставляем символ «?» для вопросительных предложений
-            // выставляем символ «!» для восклицательных предложений
-            text += '.'; // todo - WIP на данный момент считаем все предложения обычными.
-            break;
-        }
-    }
   } else if (isENG(language)) {
     // english rules
     // ...
