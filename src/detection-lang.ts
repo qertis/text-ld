@@ -1,21 +1,25 @@
 // @ts-ignore
 import francNode from '@qertis/franc-node';
-
+import {by639_2T} from 'iso-language-codes';
 /**
  * @constant
  * @type {string}
  */
-export const UNDEFINED = 'und';
+export const UNDEFINED: string = 'und';
 /**
  * @constant
  * @type {string}
  */
-export const ENG = 'eng';
+export const ENG: string = 'eng';
 /**
  * @constant
  * @type {string}
  */
-export const RUS = 'rus';
+export const RUS: string = 'rus';
+export const ARB: string = 'arb';
+export const SPA: string = 'spa';
+export const FRA: string = 'fra';
+export const CMN: string = 'cmn';
 /**
  * @param  {string} languageCode - lang
  * @returns {boolean}
@@ -32,34 +36,13 @@ export const isRUS = (languageCode: string): boolean => {
   return /ru/.test(languageCode);
 };
 /**
- * rus -> ru; eng -> en
- *
- * @param {string} language - lang
- * @returns {string}
- */
-const langISO = (language: string): string => {
-  return language.slice(0, 2);
-}
-/**
- * @param {string} langCode - query
- * @returns {string}
- */
-const fullLangCode = (langCode: string): string => {
-  switch (langCode) {
-    case RUS:
-      return 'russian';
-    case ENG:
-      return 'english';
-    default:
-      return 'simple';
-  }
-}
-/**
  * @param {string} query
  * @returns {string}
  */
-function getlangCode(query: string) {
-  let langCode = francNode.franc(query, { whitelist: [RUS, ENG] });
+function getLangCode(query: string) {
+  const langCode = francNode.franc(query, {
+    whitelist: [RUS, ENG, ARB, SPA, FRA, CMN],
+  });
   if (langCode === UNDEFINED) {
     if (/[А-Я]/i.test(query)) {
       return RUS;
@@ -76,11 +59,11 @@ function getlangCode(query: string) {
  * @returns {object}
  */
 export default (query: string): {code: string, language: string, iso: string} => {
-  const langCode = getlangCode(query);
-  const language = fullLangCode(langCode);
+  const langCode = getLangCode(query);
+  const language = by639_2T[langCode];
   return {
     code: langCode,
-    language: language,
-    iso: langISO(language),
-  };
-};
+    language: language.name ?? 'simple',
+    iso: language.iso639_1,
+  }
+}

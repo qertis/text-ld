@@ -11,14 +11,15 @@ const SUGGEST_HOST: string = 'suggest.yandex.ru';
 /**
  * @param {string} text
  * @param {string} lang
+ * @param {number} timeout
  * @returns {Promise<any>}
  */
-const suggest = async (text: string, lang: string): Promise<[string, string[]]> => {
+const suggest = async (text: string, lang: string, timeout: number = 1000): Promise<[string, string[]]> => {
     text = encodeURIComponent(text);
     const response = await fetch(`https://${SUGGEST_HOST}/suggest-ff.cgi?part=${text}&amp;uil=${lang}&amp;v=3&amp;sn=5&amp;lr=10371&amp;yu=${yu}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        signal: AbortSignal.timeout(1000),
+        signal: AbortSignal.timeout(timeout),
     });
     return response.json();
 }

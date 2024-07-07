@@ -1,6 +1,6 @@
 {
   "name": "text-ld",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Text Linked Data a Schema.org Type",
   "main": "dist/index.cjs",
   "source": "src/index.ts",
@@ -36,14 +36,15 @@
   "author": "Denis Baskovsky (https://baskovsky.ru/)",
   "license": "UNLICENSED",
   "dependencies": {
-    "eyo-kernel": "^2.5.6"
+    "eyo-kernel": "^2.5.6",
+    "iso-language-codes": "^2.0.0"
   },
   "devDependencies": {
-    "@qertis/franc-node": "^6.2.0",
     "@parcel/packager-ts": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
+    "@qertis/franc-node": "^6.2.0",
     "parcel": "^2.12.0",
-    "typescript": "^5.4.4"
+    "typescript": "^5.5.3"
   },
   "repository": {
     "type": "git",

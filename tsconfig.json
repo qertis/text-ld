@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
+    "target": "ES2023",
     "declaration": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext"
   },
   "exclude": [
     "node_modules",

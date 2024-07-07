@@ -10,9 +10,10 @@ const SPELLER_HOST: string = 'speller.yandex.net';
 /**
  * @param {object} obj - object
  * @param {string} obj.text - Текст для проверки
- * @param {string} obj.lang - Языки проверки
- * @param {string} obj.format - Формат проверяемого текста
- * @param {number} obj.options - Опции Яндекс.Спеллера. Значением параметра является сумма значений требуемых опций
+ * @param {string} [obj.lang] - Языки проверки
+ * @param {string} [obj.format] - Формат проверяемого текста
+ * @param {number} [obj.options] - Опции Яндекс.Спеллера. Значением параметра является сумма значений требуемых опций
+ * @param {number} [obj.timeout]
  * @returns {Promise<Array<Object>|ReferenceError>}
  */
 const spellText = async ({
@@ -20,20 +21,20 @@ const spellText = async ({
   lang = 'ru,en',
   options = 0,
   format = 'plain',
-}: { text: string; lang?: string; options?: number; format?: string }): Promise<{ s: string, len: number, pos: number }[] | ReferenceError> => {
+  timeout = 1000,
+}: { text: string; lang?: string; options?: number; format?: string; timeout?: number }): Promise<{ s: string, len: number, pos: number }[] | ReferenceError> => {
   const response = await fetch(`https://${SPELLER_HOST}/services/spellservice.json/checkText`, {
-    method: "POST",
+    method: 'POST',
     body: `text=${text}&lang=${lang}&options=${options}&format=${format}`,
-    headers: {"Content-Type": "application/x-www-form-urlencoded"},
-    signal: AbortSignal.timeout(1000),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    signal: AbortSignal.timeout(timeout),
   });
   const result = await response.json();
   if (!Array.isArray(result)) {
-    throw new ReferenceError('spellCheck API changes');
+    throw new ReferenceError('Yandex API SpellCheck changes');
   }
   return result;
 };
-
 /**
  * @param {string} string - string
  * @param {number} start - start
@@ -44,7 +45,6 @@ const spellText = async ({
 const replaceBetween = (string: string, start: number, end: number, what: string): string => {
   return string.slice(0, start) + what + string.slice(end);
 };
-
 /**
  * @description Исправляем очевидные ошибки. Важно! Данные берутся относительно текущего месторасположения, включая VPN
  * @example // рублей
@@ -71,7 +71,6 @@ const correctionText = async (text: string, lang?: string): Promise<string> => {
 
   return out;
 };
-
 /**
  * @description Автоматическое исправление опечаток
  * @param {string} text - text
@@ -89,7 +88,7 @@ export default (text: string, language: string): Promise<string> => {
     // ...
   } else {
     // пока только поддерживаем языки EN, RU
-    console.warn('Unsupported language');
+    console.warn('Unsupported language:', language);
     return Promise.resolve(text);
   }
   return correctionText(text, language);

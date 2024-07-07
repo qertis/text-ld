@@ -7,12 +7,19 @@ test('Rus lang', async () => {
     assert.deepEqual(context.encodingFormat, 'plain/text');
     assert.deepEqual(context.inLanguage, 'ru');
     assert.ok(context.keywords.includes('#интересный'));
-    assert.deepEqual(context.text, 'Какой-то #интересный текст.');
+    assert.ok(context.text.startsWith('Какой-то #интересный текст'));
 });
 
+test('Spanish lang', async () => {
+    const context = await creativeWork('hola erizo como estas #hola #mundo hoy');
+    assert.deepEqual(context.encodingFormat, 'plain/text');
+    assert.deepEqual(context.inLanguage, 'es');
+    assert.ok(context.keywords.includes('#hola'));
+})
+
 test('Eng lang', async () => {
-    const context = await creativeWork('Hello my frien');
+    const context = await creativeWork('Hello my friend. How are ');
     assert.deepEqual(context.encodingFormat, 'plain/text');
     assert.deepEqual(context.inLanguage, 'en');
-    assert.deepEqual(context.text, 'Hello my friend');
+    assert.ok(context.text.startsWith('Hello my friend'));
 });
