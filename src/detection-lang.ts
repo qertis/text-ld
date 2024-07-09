@@ -21,25 +21,10 @@ export const SPA: string = 'spa';
 export const FRA: string = 'fra';
 export const CMN: string = 'cmn';
 /**
- * @param  {string} languageCode - lang
- * @returns {boolean}
- */
-// eslint-disable-next-line
-export const isENG = (languageCode: string): boolean => {
-  return /en/.test(languageCode);
-};
-/**
- * @param {string} languageCode - lang
- * @returns {boolean}
- */
-export const isRUS = (languageCode: string): boolean => {
-  return /ru/.test(languageCode);
-};
-/**
  * @param {string} query
  * @returns {string}
  */
-function getLangCode(query: string) {
+function getLangCode(query: string): string {
   const langCode = francNode.franc(query, {
     whitelist: [RUS, ENG, ARB, SPA, FRA, CMN],
   });
@@ -56,14 +41,9 @@ function getLangCode(query: string) {
 /**
  * @description Извлечение языка текста
  * @param {string} query - query
- * @returns {object}
+ * @returns {string}
  */
-export default (query: string): {code: string, language: string, iso: string} => {
+export default (query: string): string => {
   const langCode = getLangCode(query);
-  const language = by639_2T[langCode];
-  return {
-    code: langCode,
-    language: language.name ?? 'simple',
-    iso: language.iso639_1,
-  }
+  return by639_2T[langCode]?.iso639_1 ?? 'eng';
 }
