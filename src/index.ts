@@ -18,7 +18,7 @@ interface ICreativeWork {
 export async function creativeWork(text: string) {
     const context = {
         '@type': 'CreativeWork',
-        'encodingFormat': 'plain/text',
+        'encodingFormat': 'text/plain',
     } as ICreativeWork;
     if (text.startsWith(' ')) {
         text = text.trimStart();
@@ -29,8 +29,8 @@ export async function creativeWork(text: string) {
     text = stripHtml(text).result;
     text = stripAnsi(text);
     context.inLanguage = getLang(text);
-    context.text = speller(text, context.inLanguage);
-    context.keywords = getKeywords(text);
+    context.text = await speller(text, context.inLanguage);
+    context.keywords = getKeywords(context.text);
 
     return context;
 }
