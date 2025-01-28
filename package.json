@@ -1,6 +1,6 @@
 {
   "name": "text-ld",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Text Linked Data clean format",
   "main": "dist/index.cjs",
   "source": "src/index.ts",
