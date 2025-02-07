@@ -5,6 +5,7 @@ import { by639_1 } from 'iso-language-codes';
 import dictionaryRu from 'dictionary-ru';
 import { RUS, ENG } from './detection-lang';
 import retextCorrectionText from './retext';
+import wordsToNumbersRu from './fuzzy-numbers';
 
 const safeEyo = new Eyo();
 safeEyo.dictionary.loadSafeSync();
@@ -29,6 +30,9 @@ export default async (text: string, lang: string): Promise<string> => {
       } catch (error) {
         console.warn('Retext: ', error.message);
       }
+
+      text = wordsToNumbersRu(text);
+
       return text;
     }
     case ENG: {
