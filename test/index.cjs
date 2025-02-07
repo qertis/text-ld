@@ -10,12 +10,24 @@ test('date Rus', async () => {
 
 test('date word Rus', async () => {
     {
+        const context = await creativeWork('В шестнадцать двадцать синк');
+        assert.deepEqual(context.text, 'В 16 двадцать синк');
+    }
+    {
+        const context = await creativeWork('тыСЯча рублей');
+        assert.deepEqual(context.text, '1000 рублей');
+    }
+    {
+        const context = await creativeWork('Пять тысяч');
+        assert.deepEqual(context.text, '5 тысяч');
+    }
+    {
         const context = await creativeWork('Посмотри двадцать пять тысяч триста сорок два');
-        assert.deepEqual(context.text, 'Посмотри 25342');
+        assert.deepEqual(context.text, 'Посмотри 20 пять тысяч триста сорок два');
     }
     {
         const context = await creativeWork('в двадцать три Синк');
-        assert.deepEqual(context.text, 'в 23 Синк');
+        assert.deepEqual(context.text, 'в 20 три Синк');
     }
 });
 
