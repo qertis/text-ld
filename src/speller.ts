@@ -5,16 +5,12 @@ import { by639_1 } from 'iso-language-codes';
 import dictionaryRu from 'dictionary-ru';
 import { RUS, ENG } from './detection-lang';
 import retextCorrectionText from './retext';
-import wordsToNumbersRu from './fuzzy-numbers';
 
 const safeEyo = new Eyo();
 safeEyo.dictionary.loadSafeSync();
 
 /**
- * @description Автоматическое исправление опечаток
- * @param {string} text - text
- * @param {string} lang - language
- * @returns {string}
+ * @description Автоматическое исправление опечаток в тексте
  */
 export default async (text: string, lang: string): Promise<string> => {
   switch (by639_1[lang]?.iso639_2T) {
@@ -30,8 +26,6 @@ export default async (text: string, lang: string): Promise<string> => {
       } catch (error) {
         console.warn('Retext: ', error.message);
       }
-
-      text = wordsToNumbersRu(text);
 
       return text;
     }

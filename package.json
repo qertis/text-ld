@@ -1,6 +1,6 @@
 {
   "name": "text-ld",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Text Linked Data clean format",
   "main": "dist/index.cjs",
   "source": "src/index.ts",
@@ -37,6 +37,8 @@
   "license": "UNLICENSED",
   "dependencies": {
     "anglicize": "~1.0.0",
+    "chrono-node": "~2.7.8",
+    "date-fns": "~3.6.0",
     "dictionary-ru": "~2.1.0",
     "eyo-kernel": "~2.5.6",
     "fuse.js": "~6.6.2",
@@ -44,13 +46,14 @@
     "retext": "~7.0.1",
     "retext-spell": "~4.0.1",
     "string-strip-html": "~8.5.0",
-    "strip-ansi": "~6.0.1"
+    "strip-ansi": "~6.0.1",
+    "typograf": "~7.4.1"
   },
   "devDependencies": {
     "@parcel/packager-ts": "^2.12.0",
     "@parcel/transformer-typescript-types": "^2.12.0",
     "@qertis/franc-node": "^6.2.0",
-    "@types/node": "^22.10.10",
+    "@types/node": "^22.13.1",
     "parcel": "^2.12.0",
     "typescript": "^5.5.3"
   },

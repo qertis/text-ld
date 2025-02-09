@@ -47,7 +47,6 @@ const fuse = new Fuse(Object.keys(numberMap), {
  */
 export default function (text: string): string {
     for (let word of text.split(' ')) {
-        word = word.trim();
         if (word.length <= 3) {
             continue;
         }
