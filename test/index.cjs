@@ -21,6 +21,10 @@ test('date UTC', async () => {
     process.env.TZ = 'UTC';
     const userTZ = 'Europe/Moscow';
     {
+        const context = await creativeWork('Завтра в двадцать стрижка', userTZ);
+        assert.ok(context.text.includes('20'));
+    }
+    {
         const context = await creativeWork('В субботу в 13:00 тренировка', userTZ);
         assert.ok(context.text.includes(' 13:00 '));
     }
