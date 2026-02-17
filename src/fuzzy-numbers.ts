@@ -42,8 +42,6 @@ const fuse = new Fuse(Object.keys(numberMap), {
 /**
  * @todo Пока что работает как преобразование только первого попавшегося числа в цифру
  * @description Преобразование численного текста в цифру
- * @param {string} text
- * @returns {string}
  */
 export default function (text: string): string {
     for (let word of text.split(' ')) {
